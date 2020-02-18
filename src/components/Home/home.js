@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { fetchPosts } from 'services/posts';
 import classes from './style.module.css';
 
 const capitalizeFirst = str => str[0].toUpperCase() + str.slice(1);
@@ -7,10 +8,8 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(response => response.json())
-      .then(json => setPosts(json));
-  });
+    fetchPosts().then(fetchedPosts => setPosts(fetchedPosts));
+  }, []);
 
   return (
     <>
